@@ -34,7 +34,14 @@ export function redirectAlert(title, message, icon, url) {
   });
 }
 
-export function confirmAlert(end_point, id, update, titulo, texto, confirmacion) {
+export function confirmAlert(
+  end_point,
+  id,
+  update,
+  titulo,
+  texto,
+  confirmacion,
+) {
   Swal.fire({
     title: titulo,
     text: texto,
