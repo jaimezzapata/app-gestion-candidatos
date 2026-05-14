@@ -100,7 +100,7 @@ function Candidates() {
 
                 <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
                   {candidates.map((item) => (
-                    <RowCandidate data={item} />
+                    <RowCandidate data={item} update={fetchCandidates}/>
                   ))}
                 </tbody>
               </table>

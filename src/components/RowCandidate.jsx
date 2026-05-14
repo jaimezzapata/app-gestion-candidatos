@@ -1,7 +1,12 @@
 import React from "react";
 import { formatDate } from "../helpers/generator";
+import { end_points } from "../services/api";
+import { confirmAlert } from "../helpers/alerts";
 
-function RowCandidate({data}) {
+function RowCandidate({ data, update }) {
+  function deleteCandidate(id) {
+    confirmAlert(end_points.candidates, id, update, "Seguro que desea eliminar?", "Esta acción no se puede revertir", "Si, eliminar");
+  }
   return (
     <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
       <td className="px-6 py-4">
@@ -11,19 +16,21 @@ function RowCandidate({data}) {
             <p className="font-semibold text-slate-900 dark:text-white">
               {data.fullName}
             </p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">ID: 3</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              {data.id}
+            </p>
           </div>
         </div>
       </td>
       <td className="px-6 py-4">
-        <p className="text-slate-700 dark:text-slate-200">
-          {data.email}
-        </p>
+        <p className="text-slate-700 dark:text-slate-200">{data.email}</p>
         <p className="text-xs text-slate-500 dark:text-slate-400">
           {data.phone}
         </p>
       </td>
-      <td className="px-6 py-4 text-slate-700 dark:text-slate-200">{data.location}</td>
+      <td className="px-6 py-4 text-slate-700 dark:text-slate-200">
+        {data.location}
+      </td>
       <td className="px-6 py-4">
         <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700">
           {data.seniority}
@@ -34,7 +41,9 @@ function RowCandidate({data}) {
           {data.status}
         </span>
       </td>
-      <td className="px-6 py-4 text-slate-700 dark:text-slate-200">{data.appliedOfferId}</td>
+      <td className="px-6 py-4 text-slate-700 dark:text-slate-200">
+        {data.appliedOfferId}
+      </td>
       <td className="px-6 py-4 text-slate-600 dark:text-slate-400">
         {formatDate(data.createdAt)}
       </td>
@@ -68,6 +77,7 @@ function RowCandidate({data}) {
             Editar
           </button>
           <button
+            onClick={() => deleteCandidate(data.id)}
             type="button"
             className="inline-flex items-center gap-2 bg-white dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-red-500/10 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-500/30 text-xs font-semibold py-2 px-3 rounded-[0.125rem] transition-colors"
           >
